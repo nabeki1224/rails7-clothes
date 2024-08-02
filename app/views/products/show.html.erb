@@ -1,0 +1,25 @@
+<%= render 'layouts/header' %>
+
+<div class="container">
+  <div class="product">
+    <%= image_tag @product.image, class: "product-img" %>
+    <div class="product__content-header text-center">
+      <div class="product_name">
+        <%= @product.name %>
+      </div>
+      <div class="product__price">
+        ¥<%= number_to_delimited(@product.price) %>
+      </div>
+    </div>
+    <%= @product.description %>
+
+    <%= form_with url: line_items_path(product_id: @product.id), method: :post do |f| %>
+      <div class="product__quantity">
+        <%= f.number_field :quantity, in: 1..10, value: 1 %>
+      </div>
+      <div class="product__btn-add-cart">
+        <%= f.submit "カートに追加する", class: "btn btn-outline-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<%= render 'layouts/header' %>
+
+<div class="container">
+  <div class="cart__title">
+    カート
+  </div>
+
+  <% if @cart.line_items.count > 0 %>
+    <div class="cart-wrapper">
+      <% @cart.line_items.each do |line_item| %>
+        <div class="card mb-3">
+          <div class="row" style="flex-wrap: unset">
+            <%= image_tag line_item.product.image, class: "product-cart-img" %>
+            <div class="card-body">
+              <div class="card-product-name col-6">
+                <%= line_item.product.name %>
+              </div>
+              <div class="card-quantity col-2">
+                <%= line_item.quantity %> 個
+              </div>
+              <div class="card__total-price col-3 text-center">
+                <%= line_item.amount %> 円
+              </div>
+              <div class="card__btn-trash col-1">
+                <%= link_to line_item_path(line_item), data: {turbo_method: :delete} do %>
+                  <i class="far fa-trash-alt"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div class="cart__sub-total">
+      小計： <%= @cart.sub_total %> 円
+    </div>
+  <% else %>
+    <div class="cart__empty">
+      カートに商品が入っていません。
+    </div>
+  <% end %>
+</div>
