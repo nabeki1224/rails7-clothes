@@ -34,6 +34,7 @@
     <div class="cart__sub-total">
       小計： <%= @cart.sub_total %> 円
     </div>
+    <%= link_to "購入する", payments_checkout_path, class: 'cart__purchase btn btn-primary' %>
   <% else %>
     <div class="cart__empty">
       カートに商品が入っていません。

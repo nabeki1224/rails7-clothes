@@ -6,4 +6,9 @@ Rails.application.routes.draw do
   resources :line_items, only: %i[create destroy]
 
   resources :carts, only: [:index]
+
+  namespace :payments do
+    get 'checkout'
+    get 'success'
+  end
 end
